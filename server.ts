@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import connectDB from './config/dbConfig'
 dotenv.config()
 connectDB()
-const app = express();
+const app: Express = express();
 
 const PORT = process.env.PORT || 4000;
 
