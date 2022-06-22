@@ -2,7 +2,7 @@ import express, { Router, Request, Response } from 'express';
 import { body, validationResult } from 'express-validator';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import User from '../../models/User';
+import UserModel from '../../models/User';
 
 const router: Router = express.Router();
 
@@ -27,14 +27,13 @@ router.post(
 
     try {
       // ===== checks if user already exist
-      const userExist = await User.findOne({ email })
-
+      const userExist = await UserModel
       if (userExist) {
         return res.status(400).json([{ msg: 'User already exist.' }])
       }
 
       // ===== Create new User
-      const user = new User({
+      const user = new UserModel({
         name,
         email,
         password
