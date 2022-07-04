@@ -1,6 +1,8 @@
 import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
-import connectDB from './config/dbConfig'
+import connectDB from './config/dbConfig';
+import morgan from 'morgan';
+import cors from 'cors'
 dotenv.config()
 connectDB()
 const app: Express = express();
@@ -9,6 +11,8 @@ const PORT = process.env.PORT || 4000;
 
 //* Middleware
 app.use(express.json());
+app.use(morgan('dev'))
+app.use(cors())
 
 app.get('/', (req: Request, res: Response) => res.send('API is up!'));
 
