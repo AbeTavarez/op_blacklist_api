@@ -2,7 +2,8 @@ import express, { Express, Request, Response } from 'express';
 import dotenv from 'dotenv';
 import connectDB from './config/dbConfig';
 import morgan from 'morgan';
-import cors from 'cors'
+import cors from 'cors';
+import helmet from 'helmet';
 dotenv.config()
 connectDB()
 const app: Express = express();
@@ -13,6 +14,7 @@ const PORT = process.env.PORT || 4000;
 app.use(express.json());
 app.use(morgan('dev'))
 app.use(cors())
+app.use(helmet.contentSecurityPolicy())
 
 app.get('/', (req: Request, res: Response) => res.send('API is up!'));
 
